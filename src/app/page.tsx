@@ -1,39 +1,39 @@
 "use client";
 
 import { useEffect, useState, useRef, MouseEvent } from "react";
-import create from "zustand";
+import { useRecipesStore } from "../store/recipes.store";
 import { type IRecipe } from "./types/global.types";
+import { type IRecipesStore } from "../store/store.types";
 import BeerCard from "./components/BeerCard/BeerCard";
 import css from "./styles.module.css";
 import Link from "next/link";
 
-const useRecipeStore = create((set) => ({
-  recipes: [] as IRecipe[],
-  setRecipes: (data: IRecipe) => set(() => ({ recipes: data })),
-}));
+// const useRecipeStore = create((set) => ({
+//   recipes: [] as IRecipe[],
+//   setRecipes: (data: IRecipe) => set(() => ({ recipes: data })),
+// }));
 
 export default function Home() {
   const [loadedRecipes, setLoadedRecipes] = useState<IRecipe[]>([]);
   const [loadMore, setLoadMore] = useState(false);
   const [selectedRecipes, setSelectedRecipes] = useState<number[]>([]);
 
-  const { recipes, setRecipes } = useRecipeStore() as {
-    recipes: IRecipe[];
-    setRecipes: (data: IRecipe[]) => void;
-  };
+  const { recipes, setRecipes } = useRecipesStore() as IRecipesStore;
 
-  const fetchRecipes = async () => {
+  async function fetchRecipes(page: string) {
     try {
-      const response = await fetch("https://api.punkapi.com/v2/beers?page=1");
+      const response = await fetch(
+        `https://api.punkapi.com/v2/beers?page=${page}`
+      );
       const data = await response.json();
       setRecipes(data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 
   useEffect(() => {
-    fetchRecipes();
+    fetchRecipes("1");
   }, []);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Home() {
     }
   }, [recipes]);
 
-  const handleRecipe = (e: MouseEvent, id: number) => {
+  const handleRecipeClick = (e: MouseEvent, id: number) => {
     e.preventDefault();
 
     if (e.button === 2) {
@@ -70,6 +70,9 @@ export default function Home() {
     );
     setRecipes(updatedRecipes);
     setSelectedRecipes([]);
+    if (recipes.length === 1) {
+      fetchRecipes("2");
+    }
   };
 
   return (
@@ -91,7 +94,7 @@ export default function Home() {
         {loadedRecipes.map((recipe: IRecipe) => (
           <li
             key={recipe.id}
-            onContextMenu={(e) => handleRecipe(e, recipe.id)}
+            onContextMenu={(e) => handleRecipeClick(e, recipe.id)}
             className={selectedRecipes.includes(recipe.id) ? css.selected : ""}
           >
             <Link href={`/recipe/${recipe.id}`}>
