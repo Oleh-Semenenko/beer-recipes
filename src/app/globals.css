@@ -87,13 +87,6 @@ body {
 
 body {
   background-color: #F5F5F5;
-  /* color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb)); */
 }
 
 a {
@@ -105,4 +98,13 @@ a {
   html {
     color-scheme: dark;
   }
+}
+
+ul, ol {
+  list-style: none;
+}
+
+.container {
+  padding: 16px 32px;
+  margin: 0 auto;
 }

@@ -5,6 +5,7 @@ import create from "zustand";
 import { type IRecipe } from "./types/global.types";
 import BeerCard from "./components/BeerCard/BeerCard";
 import css from "./styles.module.css";
+import Link from "next/link";
 
 const useRecipeStore = create((set) => ({
   recipes: [] as IRecipe[],
@@ -55,22 +56,24 @@ export default function Home() {
           prevSelectedRecipes.filter((recipeId) => recipeId !== id)
         );
       } else {
-        setSelectedRecipes((prevSelectedRecipes) => {
-          console.log(prevSelectedRecipes);
-          return [...prevSelectedRecipes, id];
-        });
+        setSelectedRecipes((prevSelectedRecipes) => [
+          ...prevSelectedRecipes,
+          id,
+        ]);
       }
     }
   };
 
   const handleDelete = (selectedRecipes: number[]) => {
-    const updatedRecipes = recipes.filter((recipe: IRecipe) => !selectedRecipes.includes(recipe.id))
-    setRecipes(updatedRecipes)
+    const updatedRecipes = recipes.filter(
+      (recipe: IRecipe) => !selectedRecipes.includes(recipe.id)
+    );
+    setRecipes(updatedRecipes);
     setSelectedRecipes([]);
   };
 
   return (
-    <div className={css.container}>
+    <div>
       <div className={css.header}>
         <h1>Beer recipes</h1>
 
@@ -91,7 +94,9 @@ export default function Home() {
             onContextMenu={(e) => handleRecipe(e, recipe.id)}
             className={selectedRecipes.includes(recipe.id) ? css.selected : ""}
           >
-            <BeerCard recipe={recipe} />
+            <Link href={`/recipe/${recipe.id}`}>
+              <BeerCard recipe={recipe} />
+            </Link>
           </li>
         ))}
       </ul>
