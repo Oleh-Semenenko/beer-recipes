@@ -8,19 +8,15 @@ import BeerCard from "./components/BeerCard/BeerCard";
 import css from "./styles.module.css";
 import Link from "next/link";
 
-// const useRecipeStore = create((set) => ({
-//   recipes: [] as IRecipe[],
-//   setRecipes: (data: IRecipe) => set(() => ({ recipes: data })),
-// }));
-
 export default function Home() {
   const [loadedRecipes, setLoadedRecipes] = useState<IRecipe[]>([]);
   const [loadMore, setLoadMore] = useState(false);
   const [selectedRecipes, setSelectedRecipes] = useState<number[]>([]);
+  const [page, setPage] = useState(1)
 
   const { recipes, setRecipes } = useRecipesStore() as IRecipesStore;
 
-  async function fetchRecipes(page: string) {
+  async function fetchRecipes(page: number) {
     try {
       const response = await fetch(
         `https://api.punkapi.com/v2/beers?page=${page}`
@@ -33,17 +29,15 @@ export default function Home() {
   }
 
   useEffect(() => {
-    fetchRecipes("1");
+    fetchRecipes(page);
   }, []);
 
   useEffect(() => {
     const totalRecipes = recipes.length;
     if (totalRecipes > 15) {
       setLoadedRecipes(recipes.slice(0, 15));
-      setLoadMore(true);
     } else {
       setLoadedRecipes(recipes);
-      setLoadMore(false);
     }
   }, [recipes]);
 
@@ -71,7 +65,8 @@ export default function Home() {
     setRecipes(updatedRecipes);
     setSelectedRecipes([]);
     if (recipes.length === 1) {
-      fetchRecipes("2");
+      setPage((prev) => prev + 1)
+      fetchRecipes(page + 1);
     }
   };
 
@@ -82,7 +77,7 @@ export default function Home() {
 
         {selectedRecipes.length > 0 && (
           <button
-            className={css.deleteButton}
+            className={css["delete-button"]}
             onClick={() => handleDelete(selectedRecipes)}
           >
             Delete
