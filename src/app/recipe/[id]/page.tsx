@@ -33,36 +33,6 @@ export default async function RecipeDetails({ params: { id } }: Props) {
         <p className={css.title}>{recipe.name}</p>
         <p className={css.description}>{recipe.description}</p>
 
-        {/* <table>
-          <thead>
-            <tr>
-              <th>Ingredient</th>
-              <th>Name</th>
-              <th>Amount</th>
-              <th>Unit</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recipe.ingredients.malt.map((i) => (
-              <tr key={i.name}>
-                <td>Malt</td>
-                <td>{i.name}</td>
-                <td>{i.amount.value}</td>
-                <td>{i.amount.unit}</td>
-              </tr>
-            ))}
-            {recipe.ingredients.hops.map((i) => (
-              <tr key={i.name}>
-                <td>Hops</td>
-                <td>{i.name}</td>
-                <td>{i.amount.value}</td>
-                <td>{i.amount.unit}</td>
-              </tr>
-            ))}
-            {recipe.ingredients.yeast}
-          </tbody>
-        </table> */}
-
         <div className={css.info}>
           <h2>Ingredients</h2>
 

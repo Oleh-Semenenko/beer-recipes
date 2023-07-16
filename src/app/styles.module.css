@@ -6,15 +6,23 @@
 }
 
 .list {
+  padding: 12px;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 30px;
+  gap: 20px;
   justify-items: center;
+  height: 70vh;
+  overflow-y: scroll;
+}
+
+.card {
+  height: 300px;
 }
 
 .selected {
-  background-color: aquamarine;
+  background-color: #a3cdef;
+  height: 300px;
 }
 
 .delete-button {
