@@ -39,35 +39,6 @@ export default async function RecipeDetails({ params: { id } }: Props) {
         <div className={css.wrapper}>
           <div className={css.flex}>
             <h2>Ingredients</h2>
-
-            {/* <ul>
-              <li>
-                <h3>Malt</h3>
-                <ul className={css["ingredients-list"]}>
-                  {recipe.ingredients.malt.map((i, index) => (
-                    <li key={index}>
-                      {i.name} - {i.amount.value} {i.amount.unit}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li>
-                <h3>Hops</h3>
-                <ul className={css["ingredients-list"]}>
-                  {recipe.ingredients.hops.map((i, index) => (
-                    <li key={index}>
-                      {i.name} - {i.amount.value} {i.amount.unit}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-              <li>
-                <h3>Yeast</h3>
-                <p className={css["ingredients-list"]}>
-                  {recipe.ingredients.yeast}
-                </p>
-              </li>
-            </ul> */}
             
             <div className={css.flex}>
               <div className={css.flex}>
