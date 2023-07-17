@@ -18,3 +18,22 @@ interface IHops extends IBaseIngredient {
   add: string;
   attribute: string;
 }
+
+export interface IMethod {
+  mash_temp: [
+    {
+      temp: {
+        value: number;
+        unit: string;
+      };
+      duration: number;
+    }
+  ];
+  fermentation: {
+    temp: {
+      value: number;
+      unit: string;
+    };
+  };
+  twist: string;
+}

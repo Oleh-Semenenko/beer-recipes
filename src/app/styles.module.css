@@ -6,7 +6,7 @@
 }
 
 .list {
-  padding: 12px;
+  padding: 60px 12px;
   list-style: none;
   display: grid;
   grid-template-columns: repeat(5, 1fr);

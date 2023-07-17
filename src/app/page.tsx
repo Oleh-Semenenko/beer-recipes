@@ -34,7 +34,7 @@ export default function Home() {
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: "200px",
+    rootMargin: "250px",
     root: list.current,
   });
 
@@ -137,7 +137,6 @@ export default function Home() {
         <ul className={css.list} ref={list}>
           {loadedRecipes.map((recipe: IRecipe, index: number) => (
             <li
-              data={recipe.id}
               key={recipe.id}
               ref={index === loadedRecipes.length - 1 ? ref : null}
               onContextMenu={(e) => handleRecipeClick(e, recipe.id)}

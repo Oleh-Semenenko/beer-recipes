@@ -1,4 +1,5 @@
-import { type IIngredients } from "../recipe/[id]/ingredients.types";
+import { type IIngredients } from "../recipe/[id]/beer-details.types";
+import { type IMethod } from "../recipe/[id]/beer-details.types";
 
 export interface IRecipe {
   id: number;
@@ -9,4 +10,6 @@ export interface IRecipe {
   abv?: number;
   ibu?: number;
   ingredients: IIngredients;
+  first_brewed?: string;
+  method?: IMethod
 }

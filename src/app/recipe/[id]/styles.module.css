@@ -3,10 +3,16 @@
   gap: 30px;
 }
 
-.info {
+.flex {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
@@ -14,6 +20,43 @@
   font-weight: 700;
 }
 
+.brewing {
+  font-size: 20px;
+  font-weight: 600;
+}
+
 .ingredients-list {
   padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.method {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items:flex-start;
+  gap: 80px;
+}
+
+.twist {
+  flex-grow: 1;
+  font-weight: 600;
+}
+
+.mash-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fermentation-title {
+  margin-bottom: 12px;
 }

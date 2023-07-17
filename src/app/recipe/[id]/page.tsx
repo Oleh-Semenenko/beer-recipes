@@ -29,35 +29,102 @@ export default async function RecipeDetails({ params: { id } }: Props) {
         width={200}
         height={300}
       />
-      <div className={css.info}>
-        <p className={css.title}>{recipe.name}</p>
+      <div className={css.flex}>
+        <div className={css["title-wrapper"]}>
+          <p className={css.title}>{recipe.name}</p>
+          <p className={css.brewing}>First brewed: {recipe.first_brewed}</p>
+        </div>
         <p className={css.description}>{recipe.description}</p>
 
-        <div className={css.info}>
-          <h2>Ingredients</h2>
+        <div className={css.wrapper}>
+          <div className={css.flex}>
+            <h2>Ingredients</h2>
 
-          <ul>
-            <li>
-              <h3>Malt</h3>
-              <ul className={css["ingredients-list"]}>
-                {recipe.ingredients.malt.map((i, index) => (
-                  <li key={index}>{i.name} - {i.amount.value} {i.amount.unit}</li>
+            {/* <ul>
+              <li>
+                <h3>Malt</h3>
+                <ul className={css["ingredients-list"]}>
+                  {recipe.ingredients.malt.map((i, index) => (
+                    <li key={index}>
+                      {i.name} - {i.amount.value} {i.amount.unit}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              <li>
+                <h3>Hops</h3>
+                <ul className={css["ingredients-list"]}>
+                  {recipe.ingredients.hops.map((i, index) => (
+                    <li key={index}>
+                      {i.name} - {i.amount.value} {i.amount.unit}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+              <li>
+                <h3>Yeast</h3>
+                <p className={css["ingredients-list"]}>
+                  {recipe.ingredients.yeast}
+                </p>
+              </li>
+            </ul> */}
+            
+            <div className={css.flex}>
+              <div className={css.flex}>
+                <h3>Malt</h3>
+                <ul className={css["ingredients-list"]}>
+                  {recipe.ingredients.malt.map((i, index) => (
+                    <li key={index}>
+                      {i.name} - {i.amount.value} {i.amount.unit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={css.flex}>
+                <h3>Hops</h3>
+                <ul className={css["ingredients-list"]}>
+                  {recipe.ingredients.hops.map((i, index) => (
+                    <li key={index}>
+                      {i.name} - {i.amount.value} {i.amount.unit}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className={css.flex}>
+                <h3>Yeast</h3>
+                <p className={css["ingredients-list"]}>
+                  {recipe.ingredients.yeast}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h2>Method</h2>
+            <div className={css.method}>
+              <ul className={css["mash-list"]}>
+                <h3>Mash temp</h3>
+                {recipe.method?.mash_temp.map((item, index) => (
+                  <li key={index}>
+                    <p>
+                      Temperature - {item.temp.value} {item.temp.unit}
+                    </p>
+                    <p>Duration - {item.duration}</p>
+                  </li>
                 ))}
               </ul>
-            </li>
-            <li>
-              <h3>Hops</h3>
-              <ul className={css["ingredients-list"]}>
-                {recipe.ingredients.hops.map((i, index) => (
-                  <li key={index}>{i.name} - {i.amount.value} {i.amount.unit}</li>
-                ))}
-              </ul>
-            </li>
-            <li>
-              <h3>Yeast</h3>
-              <p className={css["ingredients-list"]}>{recipe.ingredients.yeast}</p>
-            </li>
-          </ul>
+
+              <div>
+                <h3 className={css["fermentation-title"]}>Fermentation </h3>
+                {recipe.method?.fermentation.temp.value}{" "}
+                {recipe.method?.fermentation.temp.unit}
+              </div>
+
+              <p className={css.twist}>{recipe.method?.twist}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ export default function BeerCard({ recipe }: { recipe: IRecipe }) {
       <Image
         src={recipe.image_url}
         alt={recipe.name}
-        width={100}
+        width={60}
         height={150}
       />
       <p className={css.title}>{recipe.name}</p>
