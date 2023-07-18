@@ -15,15 +15,11 @@ import BeerCard from "./components/BeerCard/BeerCard";
 import css from "./styles.module.css";
 import Link from "next/link";
 
-import { useInView, InView } from "react-intersection-observer";
+import { useInView } from "react-intersection-observer";
 
 export default function Home() {
-  const [loadedRecipes, setLoadedRecipes] = useState<IRecipe[]>(
-    useMemo(() => [], [])
-  );
-  const [selectedRecipes, setSelectedRecipes] = useState<number[]>(
-    useMemo(() => [], [])
-  );
+  const [loadedRecipes, setLoadedRecipes] = useState<IRecipe[]>([]);
+  const [selectedRecipes, setSelectedRecipes] = useState<number[]>([]);
   const [page, setPage] = useState(1);
   const [lastIdx, setLastIdx] = useState(15);
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +33,21 @@ export default function Home() {
     rootMargin: "250px",
     root: list.current,
   });
+
+  async function fetchRecipes(page: number) {
+    try {
+      setIsLoading(true);
+      const response = await fetch(
+        `https://api.punkapi.com/v2/beers?page=${page}`
+      );
+      const data = await response.json();
+      setRecipes(data);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  }
 
   useEffect(() => {
     if (inView) {
@@ -55,24 +66,9 @@ export default function Home() {
     }
   }, [inView, recipes, lastIdx]);
 
-  async function fetchRecipes(page: number) {
-    try {
-      setIsLoading(true);
-      const response = await fetch(
-        `https://api.punkapi.com/v2/beers?page=${page}`
-      );
-      const data = await response.json();
-      setRecipes(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   useEffect(() => {
     fetchRecipes(page);
-  }, [page]);
+  }, []);
 
   useEffect(() => {
     const totalRecipes = recipes.length;

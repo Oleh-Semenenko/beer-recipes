@@ -75,7 +75,7 @@ export default async function RecipeDetails({ params: { id } }: Props) {
           <div>
             <h2>Method</h2>
             <div className={css.method}>
-              <ul className={css["mash-list"]}>
+              <ul className={css.flex}>
                 <h3>Mash temp</h3>
                 {recipe.method?.mash_temp.map((item, index) => (
                   <li key={index}>

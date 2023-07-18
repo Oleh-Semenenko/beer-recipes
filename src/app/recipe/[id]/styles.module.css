@@ -51,12 +51,6 @@
   font-weight: 600;
 }
 
-.mash-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 .fermentation-title {
   margin-bottom: 12px;
 }
